@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        copyDatabase()
         return true
     }
 
@@ -41,6 +42,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    // Database methods
+    func getDBPath() -> String
+    {
+        let devicePaths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        let documentsDir = devicePaths[0] // Get the first path, which is documents
+        let dbPath = (documentsDir as NSString).appendingPathComponent("ShoppingList.db")
+        return dbPath
+    }
+    
+    func copyDatabase()
+    {
+        let fileManager = FileManager.default // Get the file manager
+        
+        let dbPath = getDBPath()
+        
+        guard !fileManager.fileExists(atPath: dbPath) else {
+            print("Database already exist!")
+            return
+        }
+        
+        if let defaultDBPath = Bundle.main.path(forResource: "ShoppingList", ofType: "db"){
+            do {
+                try fileManager.copyItem(atPath: defaultDBPath, toPath: dbPath)
+                print(defaultDBPath)
+            } catch {
+                print("Failed to create writable database file. Error: \(error.localizedDescription)")
+            }
+        } else {
+            print("Cannot find in NSBundle")
+        }
+    }
 }
 
