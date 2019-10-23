@@ -21,12 +21,6 @@ class ShoppingListViewController: UITableViewController, AddItemDelegate {
     var sections = [Section]() // Creates an array of sections
     var db: OpaquePointer? = nil
     
-    //let i1 = ShopItem(name: "Eggs", price: 3.50,quantity: 1, type: .Dairy)
-//    let i2 = ShopItem(name: "Milk", price: 1.50, quantity: 4, type: .Dairy)
-//    let i3 = ShopItem(name: "Flour", price: 2.99, quantity: 1, type: .Meat)
-//    let i4 = ShopItem(name: "Butter", price: 2.40, quantity: 1, type: .Dairy)
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,8 +30,6 @@ class ShoppingListViewController: UITableViewController, AddItemDelegate {
         }
         
         getItems()
-
-//        ShoppingList = [i1,i2,i3,i4]
         
         // Group the items in the shopping list by type
         let groups = Dictionary(grouping: ShoppingList, by: { $0.type })

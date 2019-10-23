@@ -11,7 +11,7 @@ import Foundation
 struct ShopItem: Comparable {
     
     // Enum type
-    enum ItemType: String {
+    enum ItemType: String, CaseIterable {
         case Groceries, Electronics, Clothing, Other 
     }
     

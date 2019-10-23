@@ -26,6 +26,8 @@ class AddItemViewController: UIViewController {
     
     var db: OpaquePointer? = nil
     
+    let pickerView = UIPickerView() // Create a pickerview
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,6 +38,12 @@ class AddItemViewController: UIViewController {
             print("Error connecting")
             return
         }
+        
+        
+        pickerView.delegate = self // Set this controller as the delegate
+        typeTextField.delegate = self
+        // Set the pickerview as the input view of the textfield
+        typeTextField.inputView = pickerView
     }
     
 
@@ -66,10 +74,15 @@ class AddItemViewController: UIViewController {
             return
         }
         
-        let id = insertItem(name: name, price: price, type: .Other, quantity: quantity)
+        guard let type = typeTextField.text, !type.isEmpty else {
+            self.showToast(title: "Field Required", message: "Type is required!")
+            return
+        }
+        
+        let id = insertItem(name: name, price: price, type: ShopItem.ItemType(rawValue: type) ?? .Other, quantity: quantity)
         
         if id != 0 {
-            let item = ShopItem(id: id, name: name, price: price, type: .Other, quantity: quantity)
+            let item = ShopItem(id: id, name: name, price: price, type: ShopItem.ItemType(rawValue: type) ?? .Other, quantity: quantity)
             
             self.delegate?.didSaveItem(item: item)
         }
@@ -140,5 +153,34 @@ class AddItemViewController: UIViewController {
         alertController.addAction(alertAction)
         
         self.present(alertController, animated: true,completion: nil)
+    }
+}
+
+// MARK: -- PickerView Delegate
+
+extension AddItemViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return ShopItem.ItemType.allCases.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return ShopItem.ItemType.allCases[row].rawValue
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        typeTextField.text = ShopItem.ItemType.allCases[row].rawValue
+    }
+}
+
+// MARK: -- TextField Delegate
+
+extension AddItemViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        typeTextField.text = ShopItem.ItemType.allCases[0].rawValue
     }
 }
