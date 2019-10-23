@@ -181,6 +181,8 @@ extension AddItemViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 
 extension AddItemViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        typeTextField.text = ShopItem.ItemType.allCases[0].rawValue
+        if textField.text?.isEmpty ?? true {
+            typeTextField.text = ShopItem.ItemType.allCases[0].rawValue
+        }
     }
 }
