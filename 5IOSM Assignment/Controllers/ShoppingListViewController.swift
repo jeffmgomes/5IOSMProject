@@ -21,6 +21,7 @@ class ShoppingListViewController: UITableViewController, AddItemDelegate {
     var sections = [Section]() // Creates an array of sections
     var db: OpaquePointer? = nil
     
+    @IBOutlet weak var quantityLabelCell: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,14 +63,15 @@ class ShoppingListViewController: UITableViewController, AddItemDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CellTableViewCell
 
         let section = self.sections[indexPath.section] // First get the section
         let item = section.items[indexPath.row] // Then get item inside that section
         
-        cell.textLabel?.text = item.name
-        cell.detailTextLabel?.text =  String(item.quantity!)
-
+        cell.itemNameLabel.text = item.name
+        cell.itemPriceLabel.text = NumberFormatter.localizedString(from: NSNumber(value: item.price!), number: .currency)
+        cell.itemQuantityLabel.text = String(item.quantity!)
+        
         return cell
     }
  
