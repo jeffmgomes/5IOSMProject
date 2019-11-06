@@ -14,7 +14,12 @@ class CellTableViewCell: UITableViewCell {
     @IBOutlet weak var itemPriceLabel: UILabel!
     @IBOutlet weak var itemQuantityLabel: UILabel!
     
-    
+    var item: ShopItem! {
+        didSet {
+            self.updateUI()
+        }
+    }
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,6 +29,13 @@ class CellTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func updateUI()
+    {
+        itemNameLabel.text = item.name
+        itemPriceLabel.text = NumberFormatter.localizedString(from: NSNumber(value: item.price!), number: .currency)
+        itemQuantityLabel.text = String(item.quantity!)
     }
 
 }

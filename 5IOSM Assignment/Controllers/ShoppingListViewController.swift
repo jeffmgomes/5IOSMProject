@@ -44,6 +44,12 @@ class ShoppingListViewController: UITableViewController, AddItemDelegate, Update
         self.navigationItem.leftBarButtonItem = self.editButtonItem // Add the Edit button to the left side of the screen
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.view.backgroundColor = Colour.sharedInstance.selectedColour
+        tableView.reloadData()
+    }
 
     // MARK: - TABLE VIEW
 
@@ -66,13 +72,12 @@ class ShoppingListViewController: UITableViewController, AddItemDelegate, Update
 
         let section = self.Sections[indexPath.section] // First get the section
         let item = section.items[indexPath.row] // Then get item inside that section
-        
-        cell.itemNameLabel.text = item.name
-        cell.itemPriceLabel.text = NumberFormatter.localizedString(from: NSNumber(value: item.price!), number: .currency)
-        cell.itemQuantityLabel.text = String(item.quantity!)
+        cell.backgroundColor = Colour.sharedInstance.selectedColour
+        cell.item = item // Send the ShopItem to the Cell
         
         return cell
     }
+
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -113,7 +118,7 @@ class ShoppingListViewController: UITableViewController, AddItemDelegate, Update
             
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     
     // MARK: - NAVIGATION and DELEGATES
@@ -228,7 +233,7 @@ class ShoppingListViewController: UITableViewController, AddItemDelegate, Update
         }
         
         sqlite3_finalize(queryStmt)
-        sqlite3_close(db)        
+        sqlite3_close(db)
     }
     
     func deleteItem(id: Int) -> Bool

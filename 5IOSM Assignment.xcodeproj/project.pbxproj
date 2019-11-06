@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E7365BF2372B4D100D73709 /* Colour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7365BE2372B4D100D73709 /* Colour.swift */; };
 		1EA34C5F236049A200E1588B /* CellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA34C5E236049A200E1588B /* CellTableViewCell.swift */; };
 		AA6156D72356DFE200A3C940 /* ShoppingList.db in Resources */ = {isa = PBXBuildFile; fileRef = AA6156D62356DFE200A3C940 /* ShoppingList.db */; };
 		AA9189B72328B7A9005FCF59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9189B62328B7A9005FCF59 /* AppDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E7365BE2372B4D100D73709 /* Colour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colour.swift; sourceTree = "<group>"; };
 		1EA34C5E236049A200E1588B /* CellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTableViewCell.swift; sourceTree = "<group>"; };
 		AA6156D62356DFE200A3C940 /* ShoppingList.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = ShoppingList.db; sourceTree = "<group>"; };
 		AA9189B32328B7A9005FCF59 /* 5IOSM Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "5IOSM Assignment.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				AA9189D72328BEFD005FCF59 /* ShopItem.swift */,
+				1E7365BE2372B4D100D73709 /* Colour.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				AA9189D02328BE83005FCF59 /* DetailViewController.swift in Sources */,
 				AA9189D22328BEAA005FCF59 /* AddItemViewController.swift in Sources */,
 				AA9189D82328BEFD005FCF59 /* ShopItem.swift in Sources */,
+				1E7365BF2372B4D100D73709 /* Colour.swift in Sources */,
 				AA9189CE2328BE61005FCF59 /* ShoppingListViewController.swift in Sources */,
 				AA9189D42328BECC005FCF59 /* SettingsViewController.swift in Sources */,
 				AA9189B72328B7A9005FCF59 /* AppDelegate.swift in Sources */,

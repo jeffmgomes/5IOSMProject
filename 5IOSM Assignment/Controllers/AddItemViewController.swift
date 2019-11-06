@@ -30,7 +30,7 @@ class AddItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         quantityTextField.text = Int(stepperValue.value).description
         
@@ -46,6 +46,10 @@ class AddItemViewController: UIViewController {
         typeTextField.inputView = pickerView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.view.backgroundColor = Colour.sharedInstance.selectedColour
+    }
 
     /*
     // MARK: - Navigation

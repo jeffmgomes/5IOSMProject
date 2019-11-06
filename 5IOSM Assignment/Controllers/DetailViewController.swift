@@ -33,7 +33,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         guard connectToDB() else {
             print("Error connecting")
@@ -57,6 +57,11 @@ class DetailViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.view.backgroundColor = Colour.sharedInstance.selectedColour
+    }
+    
     override func setEditing(_ editing: Bool, animated: Bool) {
         
         if self.isEditing && !editing {
@@ -69,7 +74,7 @@ class DetailViewController: UIViewController {
                 quantityStepper.isEnabled = editing
             }
         } else {
-            super.setEditing(editing, animated: animated)            
+            super.setEditing(editing, animated: animated)
             itemNameTextField.isEnabled = editing
             itemPriceTextField.isEnabled = editing
             itemTypeTextField.isEnabled = editing
